@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>NovaApp - jQuery</title>
+
+<!-- jQuery Library -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #f4f1ff;
+    color: #24105c;
+}
+
+/* Navigation Bar */
+.navbar {
+    background: #24105c;
+    color: white;
+    padding: 20px 8%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.nav-links {
+    display: flex;
+    gap: 25px;
+    list-style: none;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+}
+
+/* Hero Section */
+.hero {
+    background: linear-gradient(135deg, #24105c, #7539e8);
+    color: white;
+    text-align: center;
+    padding: 90px 20px;
+}
+
+.hero h1 {
+    font-size: 40px;
+    margin-bottom: 15px;
+}
+
+.hero p {
+    font-size: 18px;
+    margin-bottom: 25px;
+}
+
+button {
+    background: #a875ff;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 20px;
+    cursor: pointer;
+    margin: 5px;
+}
+
+/* Features */
+.features {
+    padding: 50px 20px;
+    text-align: center;
+}
+
+.feature-box {
+    display: inline-block;
+    background: white;
+    width: 200px;
+    padding: 25px;
+    margin: 15px;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px #0002;
+}
+
+/* Popup */
+#popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #0009;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-content {
+    background: white;
+    color: #24105c;
+    padding: 35px;
+    border-radius: 15px;
+    text-align: center;
+}
+
+/* Dark Theme */
+.dark {
+    background: #18122b;
+    color: white;
+}
+
+.dark .feature-box {
+    background: #30264a;
+    color: white;
+}
+
+@media(max-width: 600px) {
+    .navbar {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .nav-links {
+        gap: 12px;
+    }
+
+    .hero h1 {
+        font-size: 30px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Navigation -->
+<nav class="navbar">
+    <div class="logo">NovaApp</div>
+
+    <ul class="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#about">About</a></li>
+    </ul>
+
+    <button id="themeBtn">Dark Mode</button>
+</nav>
+
+<!-- Home Section -->
+<section class="hero" id="home">
+    <h1>Smarter App. A Better You.</h1>
+
+    <p>Boost productivity and achieve more!</p>
+
+    <button id="downloadBtn">Download Now</button>
+</section>
+
+<!-- Features Section -->
+<section class="features" id="features">
+
+    <h1>Our Features</h1>
+
+    <div class="feature-box">
+        <h2>Fast & Simple</h2>
+        <p>Get started quickly.</p>
+    </div>
+
+    <div class="feature-box">
+        <h2>Track Progress</h2>
+        <p>Stay on track.</p>
+    </div>
+
+    <div class="feature-box">
+        <h2>Secure & Reliable</h2>
+        <p>Your data is safe.</p>
+    </div>
+
+</section>
+
+<!-- About Section -->
+<section class="features" id="about">
+    <h1>About NovaApp</h1>
+    <p>Make your daily life smarter with NovaApp.</p>
+</section>
+
+<!-- Popup -->
+<div id="popup">
+    <div class="popup-content">
+        <h2>Welcome to NovaApp!</h2>
+        <p>Thanks for visiting our website.</p>
+        <button id="closeBtn">Close</button>
+    </div>
+</div>
+
+<script>
+
+// Document Ready
+$(document).ready(function() {
+
+    // Smooth Scrolling
+    $("a[href^='#']").click(function(e) {
+        e.preventDefault();
+
+        let target = $(this).attr("href");
+
+        $("html, body").animate({
+            scrollTop: $(target).offset().top
+        }, 800);
+    });
+
+    // Show Popup
+    $("#downloadBtn").click(function() {
+        $("#popup").css("display", "flex").hide().fadeIn();
+    });
+
+    // Hide Popup
+    $("#closeBtn").click(function() {
+        $("#popup").fadeOut();
+    });
+
+    // Theme Toggle
+    $("#themeBtn").click(function() {
+        $("body").toggleClass("dark");
+
+        if ($("body").hasClass("dark")) {
+            $(this).text("Light Mode");
+        } else {
+            $(this).text("Dark Mode");
+        }
+    });
+
+    // Animate Features
+    $(".feature-box").hide().fadeIn(1500);
+
+});
+
+</script>
+
+</body>
+</html>
